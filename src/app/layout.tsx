@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import { TopNavigation } from "~/components/TopNavigation";
 
 export const metadata: Metadata = {
   title: "Hustle - SLA/SLO Tracker",
@@ -14,9 +15,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className="font-sans antialiased">
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+    <html lang="en" className="dark">
+      <body className="font-sans antialiased bg-slate-950 text-white">
+        <TRPCReactProvider>
+          <TopNavigation />
+          <main className="min-h-screen">{children}</main>
+        </TRPCReactProvider>
       </body>
     </html>
   );

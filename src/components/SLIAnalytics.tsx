@@ -10,16 +10,16 @@ export function SLIAnalytics() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="text-gray-400">Loading analytics...</div>
+        <div className="text-slate-400">Loading analytics...</div>
       </div>
     );
   }
 
   if (!completedCases || completedCases.length === 0) {
     return (
-      <div className="rounded-lg border border-gray-800 bg-gray-900/50 p-6">
+      <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
         <h2 className="text-xl font-semibold text-white mb-4">SLI Analytics</h2>
-        <div className="text-gray-400">No completed cases to analyze</div>
+        <div className="text-slate-400">No completed cases to analyze</div>
       </div>
     );
   }
@@ -68,7 +68,7 @@ export function SLIAnalytics() {
   const priorities: Priority[] = ["CRITICAL", "HIGH", "MEDIUM", "LOW"];
 
   return (
-    <div className="rounded-lg border border-gray-800 bg-gray-900/50 p-6">
+    <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
       <h2 className="text-xl font-semibold text-white mb-6">SLI Analytics</h2>
       <div className="space-y-6">
         {priorities.map((priority) => {
@@ -82,8 +82,8 @@ export function SLIAnalytics() {
             <div key={priority} className="space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-sm font-medium text-gray-300">{priority}</span>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-sm font-medium text-slate-300">{priority}</span>
+                  <span className="text-xs text-slate-500">
                     ({stats.count} case{stats.count !== 1 ? "s" : ""})
                   </span>
                 </div>
@@ -113,10 +113,10 @@ export function SLIAnalytics() {
                   </div>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-full h-0.5 bg-gray-700" style={{ marginLeft: "50%" }} />
+                  <div className="w-full h-0.5 bg-slate-700" style={{ marginLeft: "50%" }} />
                 </div>
               </div>
-              <div className="text-xs text-gray-500">
+              <div className="text-xs text-slate-500">
                 Target: {getSloThreshold(priority) / 3600}h | Avg SLI: {stats.avgSli.toFixed(1)}%
               </div>
             </div>

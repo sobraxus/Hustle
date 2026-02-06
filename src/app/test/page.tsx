@@ -7,7 +7,7 @@ export default function TestPage() {
   const [createdCaseId, setCreatedCaseId] = useState<string | null>(null);
   const utils = api.useUtils();
 
-  const { mutate: createCase, isLoading: isCreating } = api.case.create.useMutation({
+  const { mutate: createCase, isPending: isCreating } = api.case.create.useMutation({
     onSuccess: (data) => {
       setCreatedCaseId(data.id);
       void utils.case.getAll.invalidate();
@@ -29,7 +29,7 @@ export default function TestPage() {
     },
   });
 
-  const { mutate: deleteAll, isLoading: isDeleting } = api.case.deleteAll.useMutation({
+  const { mutate: deleteAll, isPending: isDeleting } = api.case.deleteAll.useMutation({
     onSuccess: (data) => {
       alert(data.message);
       setCreatedCaseId(null);
@@ -61,7 +61,7 @@ export default function TestPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8">
+    <div className="min-h-screen bg-slate-950 p-8">
       <div className="container mx-auto max-w-4xl">
         <h1 className="text-3xl font-bold text-white mb-8">Test Controls</h1>
 
@@ -108,24 +108,29 @@ export default function TestPage() {
 
           {/* Update Last Created Case */}
           {createdCaseId && (
-            <div className="rounded-lg border border-gray-800 bg-gray-900/50 p-6">
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
               <h2 className="text-xl font-semibold text-white mb-4">
                 Update Last Created Case
               </h2>
               <div className="flex gap-4">
                 <button
                   onClick={assignCase}
-                  className="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30"
+                  disabled={isCreating}
+                  className="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 disabled:opacity-50"
                 >
                   Assign Case
                 </button>
                 <button
                   onClick={completeCase}
-                  className="px-4 py-2 bg-green-500/20 text-green-400 rounded-lg hover:bg-green-500/30"
+                  disabled={isCreating}
+                  className="px-4 py-2 bg-green-500/20 text-green-400 rounded-lg hover:bg-green-500/30 disabled:opacity-50"
                 >
                   Complete Case
                 </button>
               </div>
+              <p className="mt-2 text-sm text-slate-400">
+                Note: You can also manage cases individually from the Cases table on the Dashboard or Cases page.
+              </p>
             </div>
           )}
 
