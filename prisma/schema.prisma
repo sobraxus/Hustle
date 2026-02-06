@@ -1,0 +1,23 @@
+// Learn more at https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Case {
+  id                String   @id @default(cuid())
+  status            String   @default("OPEN") // OPEN, ASSIGNED, RESOLVED
+  priority          String   @default("MEDIUM") // LOW, MEDIUM, HIGH, CRITICAL
+  createdAt         DateTime @default(now())
+  assignedAt        DateTime?
+  completedAt       DateTime?
+  responseSli       Int?     // Response SLI in seconds
+  resolutionSli     Int?     // Resolution SLI in seconds
+  isCallOutTriggered Boolean @default(false)
+  updatedAt         DateTime @updatedAt
+}
